@@ -1,0 +1,125 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime @default(now())
+}
+
+model SiteSettings {
+  id          Int      @id @default(1)
+  nameAr      String   @default("معتز محمد")
+  nameEn      String   @default("Moataz Mohamed")
+  roleAr      String   @default("مطوّر واجهات أمامية")
+  roleEn      String   @default("Frontend Developer")
+  taglineAr   String   @default("")
+  taglineEn   String   @default("")
+  bioAr       String   @default("")
+  bioEn       String   @default("")
+  email       String   @default("")
+  phone       String   @default("")
+  locationAr  String   @default("الإسكندرية، مصر")
+  locationEn  String   @default("Alexandria, Egypt")
+  avatarUrl   String   @default("/img/face.webp")
+  heroImage   String   @default("/img/hero-moataz.webp")
+  cvUrl       String   @default("")
+  github      String   @default("")
+  linkedin    String   @default("")
+  instagram   String   @default("")
+  facebook    String   @default("")
+  whatsapp    String   @default("")
+  available   Boolean  @default(true)
+  updatedAt   DateTime @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  titleAr     String
+  titleEn     String
+  categoryAr  String   @default("")
+  categoryEn  String   @default("")
+  descAr      String   @default("")
+  descEn      String   @default("")
+  longAr      String   @default("")
+  longEn      String   @default("")
+  image       String   @default("")
+  url         String   @default("")
+  repo        String   @default("")
+  tech        String[] @default([])
+  featured    Boolean  @default(false)
+  published   Boolean  @default(true)
+  year        String   @default("")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Skill {
+  id         String @id @default(cuid())
+  name       String
+  categoryAr String @default("")
+  categoryEn String @default("")
+  level      Int    @default(80)
+  icon       String @default("")
+  order      Int    @default(0)
+}
+
+model Experience {
+  id       String @id @default(cuid())
+  roleAr   String
+  roleEn   String
+  company  String @default("")
+  periodAr String @default("")
+  periodEn String @default("")
+  descAr   String @default("")
+  descEn   String @default("")
+  typeAr   String @default("")
+  typeEn   String @default("")
+  order    Int    @default(0)
+}
+
+model Certificate {
+  id      String @id @default(cuid())
+  titleAr String
+  titleEn String
+  issuer  String @default("")
+  date    String @default("")
+  image   String @default("")
+  url     String @default("")
+  order   Int    @default(0)
+}
+
+model Message {
+  id          String   @id @default(cuid())
+  name        String
+  email       String
+  phone       String   @default("")
+  projectType String   @default("")
+  body        String
+  read        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  filename  String   @default("")
+  mime      String   @default("image/png")
+  size      Int      @default(0)
+  data      String
+  createdAt DateTime @default(now())
+}
+
+model Visit {
+  id        String   @id @default(cuid())
+  path      String   @default("/")
+  createdAt DateTime @default(now())
+}
