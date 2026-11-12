@@ -26,5 +26,20 @@
     "prisma": "6.1.0",
     "tsx": "4.19.2",
     "typescript": "5.7.2"
+  },
+  "author": {
+    "name": "Moataz Mohamed",
+    "email": "mtzm2225@gmail.com",
+    "url": "https://github.com/moatazsmohamed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/moatazsmohamed/moataz-portfolio-v4.git"
+  },
+  "_fingerprint": {
+    "owner": "moatazsmohamed",
+    "author": "Moataz Mohamed",
+    "sha256": "e8fa428b72fc0e43a2632e36723784d1",
+    "notice": "See NOTICE — this fingerprint identifies the author of this code."
   }
 }
