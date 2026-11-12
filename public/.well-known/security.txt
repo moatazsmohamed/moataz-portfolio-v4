@@ -1,0 +1,13 @@
+# Security contact for moataz-portfolio-v4
+# Owner: Moataz Mohamed (@moatazsmohamed)
+# Fingerprint: e8fa428b72fc0e43a2632e36723784d1
+# Format: RFC 9116 (https://www.rfc-editor.org/rfc/rfc9116)
+
+Contact: mailto:mtzm2225@gmail.com
+Contact: https://github.com/moatazsmohamed/moataz-portfolio-v4/security/advisories/new
+Expires: 2027-11-12T14:59:50Z
+Preferred-Languages: en, ar
+Canonical: https://app-moataz-mohamed.vercel.app/.well-known/security.txt
+Policy: https://github.com/moatazsmohamed/moataz-portfolio-v4/blob/main/SECURITY.md
+Acknowledgments: https://github.com/moatazsmohamed/moataz-portfolio-v4/security/advisories
+Hiring: https://github.com/moatazsmohamed
