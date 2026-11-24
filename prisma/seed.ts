@@ -197,8 +197,17 @@ const CERTIFICATES = [
 ];
 
 async function main() {
-  const email = (process.env.ADMIN_EMAIL || "mtzm2225@gmail.com").toLowerCase();
-  const password = process.env.ADMIN_PASSWORD || "***REMOVED-CREDENTIAL***";
+  // This repository is PUBLIC. The previous defaults embedded the real admin
+  // email and password in source, so they must be treated as compromised and
+  // rotated. Seed credentials now come from the environment only; a missing
+  // value fails with a clear error instead of creating a guessable account.
+  const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+  const password = process.env.ADMIN_PASSWORD;
+  if (!email || !password) {
+    throw new Error(
+      "ADMIN_EMAIL and ADMIN_PASSWORD must be set in the environment before seeding (no in-repo defaults).",
+    );
+  }
 
   const existing = await prisma.user.findUnique({ where: { email } });
   if (!existing) {
