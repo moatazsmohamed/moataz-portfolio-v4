@@ -9,10 +9,19 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
 const COOKIE = "mp_session";
-const secret = () =>
-  new TextEncoder().encode(
-    process.env.AUTH_SECRET || "dev-secret-change-me-please-32chars-min"
-  );
+// Session signing secret comes from the environment only. This repository is
+// public, so the previous literal default was a disclosed signing key (any
+// session token could be forged). A missing secret now fails with a clear
+// error instead of falling back to a guessable value.
+const secret = () => {
+  const value = process.env.AUTH_SECRET;
+  if (!value) {
+    throw new Error(
+      "AUTH_SECRET is not set. The session signing secret must be provided via the environment; no default is allowed.",
+    );
+  }
+  return new TextEncoder().encode(value);
+};
 
 export async function createSession(email: string) {
   const token = await new SignJWT({ email })
@@ -40,8 +49,11 @@ export async function getSession() {
   const store = await cookies();
   const token = store.get(COOKIE)?.value;
   if (!token) return null;
+  // Resolve the key before the try/catch so a missing secret surfaces as a
+  // clear error rather than being swallowed as "not logged in".
+  const key = secret();
   try {
-    const { payload } = await jwtVerify(token, secret());
+    const { payload } = await jwtVerify(token, key);
     return payload as { email?: string };
   } catch {
     return null;
