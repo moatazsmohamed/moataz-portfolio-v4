@@ -41,5 +41,8 @@
     "author": "Moataz Mohamed",
     "sha256": "e8fa428b72fc0e43a2632e36723784d1",
     "notice": "See NOTICE — this fingerprint identifies the author of this code."
+  },
+  "overrides": {
+    "postcss": "8.5.33"
   }
 }
